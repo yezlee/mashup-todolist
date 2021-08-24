@@ -64,14 +64,14 @@ const InsertForm = styled.div`
   border-top: 1px solid #e9ecef;
 `;
 
-const Input = styled.div`
+const Input = styled.input`
   padding: 12px;
   border-radius: 4px;
   border: 1px solid #dee2e6;
   width: 100%;
   outline: none;
   font-size: 18px;
-  box-sizing: border-box;
+  box-sizing: border-box; // 이걸 설정 안하면 패딩을 설정했을때 오른쪽이 삐져나오게 된다.
 `;
 
 function TodoCreate() {

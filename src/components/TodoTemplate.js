@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const TodoTemplateBlock = styled.div`
-  width: 420px;
-  height: 520px;
+  width: 568px;
+  height: 720px;
 
   position: relative;
   background: white;
