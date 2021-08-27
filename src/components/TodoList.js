@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTodoState } from "../TodoContext";
 import TodoItem from "./TodoItem";
 
 const TodoListBlock = styled.div`
@@ -9,13 +10,24 @@ const TodoListBlock = styled.div`
 `;
 
 function TodoList() {
+  const todos = useTodoState();
+  console.log(todos);
   return (
     <>
       <TodoListBlock>
-        <TodoItem text="test" done={true} />
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            id={todo.id}
+            text={todo.text}
+            done={todo.done}
+          />
+        ))}
+
+        {/* <TodoItem text="test" done={true} />
         <TodoItem text="test2" done={true} />
-        <TodoItem text="test3" done={true} />
-        <TodoItem text="test4" done={true} />
+        <TodoItem text="test3" done={false} />
+        <TodoItem text="test4" done={false} /> */}
       </TodoListBlock>
     </>
   );
