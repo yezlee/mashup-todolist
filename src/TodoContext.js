@@ -3,22 +3,22 @@ import { createContext, useContext, useReducer, useRef } from "react";
 const initialTodos = [
   {
     id: 1,
-    text: "Make a project",
+    text: "Go jogging",
     done: true,
   },
   {
     id: 2,
-    text: "Make a project2",
-    done: true,
-  },
-  {
-    id: 3,
-    text: "Make a project3",
+    text: "Buy a birthday gift for Lucy",
     done: false,
   },
   {
+    id: 3,
+    text: "Water plants",
+    done: true,
+  },
+  {
     id: 4,
-    text: "Make a project4",
+    text: "Go to grocery shopping",
     done: false,
   },
 ];

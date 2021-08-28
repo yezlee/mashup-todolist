@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
-import { useTodoNextId } from "../TodoContext";
+import { useTodoDispatch, useTodoNextId } from "../TodoContext";
 
 const CircleButton = styled.button`
   background: #38d9d9;
@@ -56,7 +56,7 @@ const InsertFormPositioner = styled.div`
   position: absolute;
 `;
 
-const InsertForm = styled.div`
+const InsertForm = styled.form`
   background: #f8f9fa;
   padding: 32px;
   padding-bottom: 72px;
@@ -77,20 +77,39 @@ const Input = styled.input`
 
 function TodoCreate() {
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+
   const onToggle = () => setOpen(!open);
+  const onChange = (e) => setValue(e.target.value);
 
-  //   const nextId = useTodoNextId();
+  const dispatch = useTodoDispatch();
+  const nextId = useTodoNextId();
 
-  //   nextId.current += 1;
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "CREATE",
+      todo: {
+        id: nextId.current,
+        text: value,
+        done: false,
+      },
+    });
+    setValue("");
+    setOpen(false);
+    nextId.current += 1;
+  };
 
   return (
     <>
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
+          <InsertForm onSubmit={onSubmit}>
             <Input
               placeholder="Type what you need to do and press Enter"
               autoFocus
+              onChange={onChange}
+              value={value}
             />
           </InsertForm>
         </InsertFormPositioner>
@@ -102,4 +121,5 @@ function TodoCreate() {
   );
 }
 
-export default TodoCreate;
+export default React.memo(TodoCreate);
+//React.memo로 감싸면 불필요한 렌더링을 막아준다.
